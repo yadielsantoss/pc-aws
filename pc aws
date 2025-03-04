@@ -19,6 +19,7 @@ local Tabs = {
     Lucifer = Window:AddTab({ Title = "Lucifer part", Icon = "" }),
     Jaybo = Window:AddTab({ Title = "Jaybo part", Icon = "" }),
     Cherise = Window:AddTab({ Title = "Cherise part", Icon = "" }),
+    Misc = Window:AddTab({ Title = "Misc", Icon = "" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
@@ -1390,6 +1391,32 @@ Toggle:OnChanged(function(state) -- Detects toggle state change
     end
 end)
 
+local Toggle = Tabs.Lucifer:AddToggle("MyToggle", {Title = "boss RiftedWarrior", Default = false })
+local running = false  -- Keeps track of whether the loop should be running
+
+Toggle:OnChanged(function(state) -- Detects toggle state change
+    running = state  -- Updates the running status based on toggle
+
+    if running then
+        spawn(function() -- Start the loop only if toggle is ON
+            while running do
+                local args = {
+                    [1] = "RiftedWarrior",
+                    [2] = workspace:WaitForChild("GameObjects"):WaitForChild("ArmWrestling"):WaitForChild("16"):WaitForChild("NPC"):WaitForChild("RiftedWarrior"):WaitForChild("Table"),
+                    [3] = "16"
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ArmWrestleService"):WaitForChild("RE"):WaitForChild("onEnterNPCTable"):FireServer(unpack(args))
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ArmWrestleService"):WaitForChild("RE"):WaitForChild("onClickRequest"):FireServer()
+
+                wait(0) -- Delay to prevent excessive requests
+
+                if not running then break end -- Exit loop if toggle is turned OFF
+            end
+        end)
+    end
+end)
 
 local Toggle = Tabs.Iamrich:AddToggle("MyToggle", {Title = "merchant slot 4", Default = false })
 local running = false  -- Keeps track of whether the loop should be running
@@ -1414,6 +1441,594 @@ Toggle:OnChanged(function(state) -- Detects toggle state change
                 if not running then break end -- Exit loop if toggle is turned OFF
             end
         end)
+    end
+end)
+
+Tabs.Misc:AddParagraph({
+    Title = "Delete the notification will remove all notification",
+    Content = ""
+})
+
+Tabs.Misc:AddParagraph({
+    Title = "if u use all craft fruit will go fast and fast",
+    Content = ""
+})
+
+local Toggle = Tabs.Misc:AddToggle("MyToggle", {Title = "Delete the notification", Default = true })
+
+Toggle:OnChanged(function()
+    local player = game:GetService("Players").LocalPlayer
+    local playerGui = player:FindFirstChild("PlayerGui")
+    
+    if playerGui then
+        local notification = playerGui:FindFirstChild("Notification")
+        if notification then
+            notification:Destroy()
+        end
+    end
+end)
+
+local Toggle = Tabs.Misc:AddToggle("STRENGTH", {Title = "Craft fruit", Default = false})
+
+local isRunning = false
+
+-- Listen for the toggle change
+Toggle:OnChanged(function(state)
+    if state then
+        -- Start the loop when the toggle is on
+        if not isRunning then
+            isRunning = true
+            -- Loop while the toggle is on
+            while isRunning do
+                -- Set the arguments for the egg purchase
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                  
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                
+                -- Sleep for a short period to prevent overwhelming the server
+                wait(math.huge)  -- Adjust the interval as needed
+            end
+        end
+    else
+        -- Stop the loop when the toggle is off
+        isRunning = false
+    end
+end)
+
+local Toggle = Tabs.Misc:AddToggle("STRENGTH", {Title = "Craft fruit", Default = false})
+
+local isRunning = false
+
+-- Listen for the toggle change
+Toggle:OnChanged(function(state)
+    if state then
+        -- Start the loop when the toggle is on
+        if not isRunning then
+            isRunning = true
+            -- Loop while the toggle is on
+            while isRunning do
+                -- Set the arguments for the egg purchase
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                  
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                
+                -- Sleep for a short period to prevent overwhelming the server
+                wait(math.huge)  -- Adjust the interval as needed
+            end
+        end
+    else
+        -- Stop the loop when the toggle is off
+        isRunning = false
+    end
+end)
+
+local Toggle = Tabs.Misc:AddToggle("STRENGTH", {Title = "Craft fruit", Default = false})
+
+local isRunning = false
+
+-- Listen for the toggle change
+Toggle:OnChanged(function(state)
+    if state then
+        -- Start the loop when the toggle is on
+        if not isRunning then
+            isRunning = true
+            -- Loop while the toggle is on
+            while isRunning do
+                -- Set the arguments for the egg purchase
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                  
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                
+                -- Sleep for a short period to prevent overwhelming the server
+                wait(math.huge)  -- Adjust the interval as needed
+            end
+        end
+    else
+        -- Stop the loop when the toggle is off
+        isRunning = false
+    end
+end)
+
+local Toggle = Tabs.Misc:AddToggle("STRENGTH", {Title = "Craft fruit", Default = false})
+
+local isRunning = false
+
+-- Listen for the toggle change
+Toggle:OnChanged(function(state)
+    if state then
+        -- Start the loop when the toggle is on
+        if not isRunning then
+            isRunning = true
+            -- Loop while the toggle is on
+            while isRunning do
+                -- Set the arguments for the egg purchase
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                  
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                
+                -- Sleep for a short period to prevent overwhelming the server
+                wait(math.huge)  -- Adjust the interval as needed
+            end
+        end
+    else
+        -- Stop the loop when the toggle is off
+        isRunning = false
+    end
+end)
+
+local Toggle = Tabs.Misc:AddToggle("STRENGTH", {Title = "Craft fruit", Default = false})
+
+local isRunning = false
+
+-- Listen for the toggle change
+Toggle:OnChanged(function(state)
+    if state then
+        -- Start the loop when the toggle is on
+        if not isRunning then
+            isRunning = true
+            -- Loop while the toggle is on
+            while isRunning do
+                -- Set the arguments for the egg purchase
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                  
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                
+                -- Sleep for a short period to prevent overwhelming the server
+                wait(math.huge)  -- Adjust the interval as needed
+            end
+        end
+    else
+        -- Stop the loop when the toggle is off
+        isRunning = false
+    end
+end)
+
+local Toggle = Tabs.Misc:AddToggle("STRENGTH", {Title = "Craft fruit", Default = false})
+
+local isRunning = false
+
+-- Listen for the toggle change
+Toggle:OnChanged(function(state)
+    if state then
+        -- Start the loop when the toggle is on
+        if not isRunning then
+            isRunning = true
+            -- Loop while the toggle is on
+            while isRunning do
+                -- Set the arguments for the egg purchase
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Cookie",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                local args = {
+                    [1] = {
+                        ["Item"] = "Banana",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                  
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Donut",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 1
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+
+                local args = {
+                    [1] = {
+                        ["Item"] = "Starfruit",
+                        ["Tier"] = 2
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ItemCraftingService"):WaitForChild("RF"):WaitForChild("UpgradeSnack"):InvokeServer(unpack(args))
+                
+                -- Sleep for a short period to prevent overwhelming the server
+                wait(math.huge)  -- Adjust the interval as needed
+            end
+        end
+    else
+        -- Stop the loop when the toggle is off
+        isRunning = false
     end
 end)
 
