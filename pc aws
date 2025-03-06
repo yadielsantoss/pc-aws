@@ -19,8 +19,8 @@ local Tabs = {
     Lucifer = Window:AddTab({ Title = "Lucifer part", Icon = "" }),
     Jaybo = Window:AddTab({ Title = "Jaybo part", Icon = "" }),
     Cherise = Window:AddTab({ Title = "Cherise part", Icon = "" }),
+    ZE = Window:AddTab({ Title = "ZE part", Icon = "" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
 Tabs.Inf:AddParagraph({
@@ -29,6 +29,40 @@ Tabs.Inf:AddParagraph({
 })
 
 local Toggle = Tabs.Jean:AddToggle("STRENGTH", {Title = "GhostPirate Egg", Default = false})
+
+local isRunning = false
+
+-- Listen for the toggle change
+Toggle:OnChanged(function(state)
+    if state then
+        -- Start the loop when the toggle is on
+        if not isRunning then
+            isRunning = true
+            -- Loop while the toggle is on
+            while isRunning do
+                -- Set the arguments for the egg purchase
+                local args = {
+                    [1] = "GhostPirate", -- Name of the egg
+                    [2] = nil,       -- Placeholder (not used)
+                    [3] = nil,       -- Triple Egg (gamepass)
+                    [4] = false,     -- Auto Egg (gamepass)
+                    [5] = nil,       -- Placeholder (not used)
+                    [6] = true       -- Max egg
+                }
+
+                game:GetService("ReplicatedStorage").Packages.Knit.Services.EggService.RF.purchaseEgg:InvokeServer(unpack(args))
+
+                -- Sleep for a short period to prevent overwhelming the server
+                wait(0)  -- Adjust the interval as needed
+            end
+        end
+    else
+        -- Stop the loop when the toggle is off
+        isRunning = false
+    end
+end)
+
+local Toggle = Tabs.ZE:AddToggle("STRENGTH", {Title = "GhostPirate Egg", Default = false})
 
 local isRunning = false
 
@@ -1454,19 +1488,6 @@ Tabs.Misc:AddParagraph({
     Content = ""
 })
 
-local Toggle = Tabs.Misc:AddToggle("MyToggle", {Title = "Delete the notification", Default = true })
-
-Toggle:OnChanged(function()
-    local player = game:GetService("Players").LocalPlayer
-    local playerGui = player:FindFirstChild("PlayerGui")
-    
-    if playerGui then
-        local notification = playerGui:FindFirstChild("Notification")
-        if notification then
-            notification:Destroy()
-        end
-    end
-end)
 
 local Toggle = Tabs.Misc:AddToggle("STRENGTH", {Title = "Craft fruit", Default = false})
 
@@ -2084,35 +2105,3 @@ Tabs.Iamrich:AddButton({
         ab.Text="Roblox tried to kick u but i kicked him instead"wait(2)ab.Text="Status : Active"end)
     end
 })
-
--- Addons:
--- SaveManager (Allows you to have a configuration system)
--- InterfaceManager (Allows you to have a interface managment system)
-
--- Hand the library over to our managers
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
-
--- Ignore keys that are used by ThemeManager.
--- (we dont want configs to save themes, do we?)
-SaveManager:IgnoreThemeSettings()
-
--- You can add indexes of elements the save manager should ignore
-SaveManager:SetIgnoreIndexes({})
-
--- use case for doing it this way:
--- a script hub could have themes in a global folder
--- and game configs in a separate folder per game
-InterfaceManager:SetFolder("FluentScriptHub")
-SaveManager:SetFolder("FluentScriptHub/specific-game")
-
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-SaveManager:BuildConfigSection(Tabs.Settings)
-
-
-Window:SelectTab(1)
-
-
--- You can use the SaveManager:LoadAutoloadConfig() to load a config
--- which has been marked to be one that auto loads!
-SaveManager:LoadAutoloadConfig()
